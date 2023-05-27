@@ -1,0 +1,47 @@
+install react js app
+Connect ec2 with ssh client and install the following dependencies
+1.node js – yum install nodejs -y
+2.react js – npx create-react-app <folder name>
+3.cd <folder name>
+4.npm — npm install
+5.npm start 
+>>>if u have ur own code then no need to run npx command.
+>>>npx command will create new react app in the mentioned folder
+>>>along with the app it will create all dependency files like package.json,package-lock-json,src…etc (in the src folder only our app runs)
+>>>the app will start with npm start command
+
+Then modify the reactjs code which is provided by npx command
+
+>>>goto to the folder which u have created along with npx command 
+cd <folder name>
+>>>find the list of files and folders in it
+ls -ltr
+>>>u can find the src folder and goto that folder
+cd src
+>>>check the list of files — ls -ltr
+>>>open the App.js file
+vi App.js
+>>>replace the code with the code i provided below
+
+import React, { useState } from 'react';
+
+function App() {
+  const [studentTable, setStudentTable] = useState('');
+
+  const handleClick = async () => {
+    const response = await fetch('http://ip-of-ur-backend-ec2/');
+    const result = await response.text();
+    setStudentTable(result);
+  };
+
+  return (
+    <>
+      <h1>Welcome to the Student List</h1>
+      <button onClick={handleClick}>Get Student List</button>
+      <div dangerouslySetInnerHTML={{ __html: studentTable }} />
+    </>
+  );
+}
+
+export default App;
+
